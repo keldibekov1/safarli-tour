@@ -8,6 +8,8 @@ import TourDetails from "./pages/tourdetail/TourDetails";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
+import Agencies from "./pages/agencies/Agencies";
+import Tours from "./pages/tours/Tours";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/agencies" element={<Agencies />} />
+          <Route path="/tours" element={<Tours />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
