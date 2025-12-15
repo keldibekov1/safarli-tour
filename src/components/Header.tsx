@@ -44,12 +44,17 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="sm">
-            Kirish
-          </Button>
-          <Button variant="accent" size="sm">
-            Ro'yxatdan o'tish
-          </Button>
+          <Link to="/login">
+            <Button variant="default" size="sm">
+              Kirish
+            </Button>
+          </Link>
+
+          <Link to="/register">
+            <Button variant="accent" size="sm">
+              Ro'yxatdan o'tish
+            </Button>
+          </Link>
         </div>
 
         <button
@@ -97,12 +102,16 @@ const Header = () => {
               Biz haqimizda
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
-              <Button variant="ghost" size="sm" className="justify-start">
-                Kirish
-              </Button>
-              <Button variant="accent" size="sm">
-                 Ro'yxatdan o'tish
-              </Button>
+              <Link to="/login">
+                <Button size="sm" className="justify-start">
+                  Kirish
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="accent" size="sm">
+                  Ro'yxatdan o'tish
+                </Button>
+              </Link>
             </div>
           </nav>
         </div>

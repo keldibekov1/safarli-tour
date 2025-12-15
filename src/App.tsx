@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import TourDetails from "./pages/tourdetail/TourDetails";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/auth/login/Login";
+import Register from "./pages/auth/register/Register";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +20,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
