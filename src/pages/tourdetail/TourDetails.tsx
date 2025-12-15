@@ -9,10 +9,17 @@ import TourIncludes from "./components/TourIncludes";
 import TourAgencyCard from "./components/TourAgencyCard";
 import { useTour } from "@/hooks/useTours";
 import Loading from "@/components/common/Loading";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TourDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { data: tour, isLoading, isError } = useTour(id);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [id]);
 
   if (isLoading) {
     return <Loading />;
@@ -27,13 +34,13 @@ const TourDetails = () => {
       <Header />
 
       <main className="container py-8">
-        <Link
-          to="/"
+        <button
+          onClick={() => navigate(-1)}
           className="inline-flex items-center gap-2 mb-6 text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="w-4 h-4" />
           Orqaga
-        </Link>
+        </button>
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
