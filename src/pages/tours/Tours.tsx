@@ -24,15 +24,6 @@ const Tours = () => {
           doloremque dicta distinctio? Aut, expedita vitae. Dolor blanditiis
           odit aliquid quisquam debitis, modi explicabo culpa doloremque
           voluptatum deleniti tenetur quis animi harum aut neque iure delectus,
-          iusto incidunt tempora nulla maiores necessitatibus ab veniam aliquam.
-          Earum officia iste adipisci necessitatibus accusamus quibusdam quae
-          fuga unde illum, animi, repellendus, dolorum iusto minima quod
-          molestias minus consequuntur commodi nostrum maxime voluptate id
-          laudantium nulla dolor. Necessitatibus tempore repellat corporis,
-          assumenda quasi architecto magni quam, eveniet officia commodi porro
-          voluptates, laboriosam rerum? Animi inventore possimus est vitae
-          aliquam quae libero velit autem delectus iste?ddd
-          wsss
         </div>
       </div>
       <Footer />

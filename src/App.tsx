@@ -10,6 +10,7 @@ import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import Agencies from "./pages/agencies/Agencies";
 import Tours from "./pages/tours/Tours";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/tour/:id" element={<TourDetails />} />
