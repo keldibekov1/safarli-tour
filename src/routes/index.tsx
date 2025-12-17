@@ -14,7 +14,7 @@ const MainRoutes = () => {
       <Route path="/tour/:id" element={<TourDetails />} />
       <Route path="/agencies" element={<Agencies />} />
       <Route path="/tours" element={<Tours />} />
-      
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<NotFound />} />

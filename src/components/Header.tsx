@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, MapPin } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-card/80 backdrop-blur-lg border-b border-border">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary">
-            <MapPin className="w-5 h-5 text-accent" />
-          </div>
           <span className="text-xl font-bold text-foreground">Safarli</span>
         </Link>
 
@@ -44,6 +44,17 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg hover:bg-muted transition"
+          >
+            {theme === "dark" ? (
+              <Sun className="w-5 h-5" />
+            ) : (
+              <Moon className="w-5 h-5" />
+            )}
+          </button>
+
           <Link to="/login">
             <Button variant="default" size="sm">
               Kirish
@@ -112,6 +123,20 @@ const Header = () => {
                   Ro'yxatdan o'tish
                 </Button>
               </Link>
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                {theme === "dark" ? (
+                  <>
+                    <Sun className="w-4 h-4" /> Light mode
+                  </>
+                ) : (
+                  <>
+                    <Moon className="w-4 h-4" /> Dark mode
+                  </>
+                )}
+              </button>
             </div>
           </nav>
         </div>

@@ -5,7 +5,7 @@ const CTASection = () => {
   return (
     <section className="py-16 md:py-24">
       <div className="container">
-        <div className="hero-gradient rounded-3xl p-8 md:p-16 relative overflow-hidden">
+        <div   className="hero-gradient rounded-3xl p-8 md:p-16 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute -top-20 -right-20 w-80 h-80 bg-accent rounded-full blur-3xl" />
             <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-accent rounded-full blur-3xl" />
@@ -17,7 +17,8 @@ const CTASection = () => {
                 Tur firmasimisiz?
               </h2>
               <p className="text-primary-foreground/80 text-lg mb-6">
-                Safarli platformasida o'z turlaringizni joylashtiring va minglab sayohatchilarga yeting. Ro'yxatdan o'tish bepul va oson.
+                Safarli platformasida o'z turlaringizni joylashtiring va minglab
+                sayohatchilarga yeting. Ro'yxatdan o'tish bepul va oson.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="hero" size="lg" className="gap-2">
@@ -33,20 +34,36 @@ const CTASection = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">0%</div>
-                <p className="text-primary-foreground/70 text-sm">Boshlang'ich to'lov</p>
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                  0%
+                </div>
+                <p className="text-primary-foreground/70 text-sm">
+                  Boshlang'ich to'lov
+                </p>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">1K+</div>
-                <p className="text-primary-foreground/70 text-sm">Oylik tashriflar</p>
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                  1K+
+                </div>
+                <p className="text-primary-foreground/70 text-sm">
+                  Oylik tashriflar
+                </p>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">24h</div>
-                <p className="text-primary-foreground/70 text-sm">Tasdiqlash vaqti</p>
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                  24h
+                </div>
+                <p className="text-primary-foreground/70 text-sm">
+                  Tasdiqlash vaqti
+                </p>
               </div>
               <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">50+</div>
-                <p className="text-primary-foreground/70 text-sm">Hamkor firmalar</p>
+                <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                  50+
+                </div>
+                <p className="text-primary-foreground/70 text-sm">
+                  Hamkor firmalar
+                </p>
               </div>
             </div>
           </div>

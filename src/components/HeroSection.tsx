@@ -1,8 +1,17 @@
-import { Search, MapPin, Calendar, DollarSign, Clock } from "lucide-react";
+import { Search, MapPin, DollarSign, Clock } from "lucide-react";
+import { Calendar as CalendarIcon } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Calendar } from "./ui/calendar";
+
+import { useState } from "react";
+import { format } from "date-fns";
+import { uz } from "date-fns/locale";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 const HeroSection = () => {
+  const [date, setDate] = useState<Date | undefined>();
   return (
     <section className="relative hero-gradient overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -44,13 +53,35 @@ const HeroSection = () => {
                   className="pl-10 h-12 bg-muted border-0 text-foreground placeholder:text-muted-foreground"
                 />
               </div>
-
               <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  placeholder="Sana"
-                  className="pl-10 h-12 bg-muted border-0 text-foreground placeholder:text-muted-foreground"
-                />
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button type="button" className="w-full">
+                      <div className="relative">
+                        <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                        <Input
+                          readOnly
+                          placeholder="Sana"
+                          value={
+                            date
+                              ? format(date, "dd MMM yyyy", { locale: uz })
+                              : ""
+                          }
+                          className="pl-10 h-12 bg-muted border-0 text-foreground placeholder:text-muted-foreground cursor-pointer"
+                        />
+                      </div>
+                    </button>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="relative">
