@@ -3,14 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import TourDetails from "./pages/tourdetail/TourDetails";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/auth/login/Login";
-import Register from "./pages/auth/register/Register";
-import Agencies from "./pages/agencies/Agencies";
-import Tours from "./pages/tours/Tours";
 import ScrollToTop from "./hooks/ScrollToTop";
+import MainRoutes from "./routes";
+import Snowfall from "react-snowfall";
 
 const queryClient = new QueryClient();
 
@@ -19,17 +14,19 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <Snowfall
+        snowflakeCount={120}
+        style={{
+          position: "fixed",
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+        }}
+      />
       <BrowserRouter>
-      <ScrollToTop/>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/tour/:id" element={<TourDetails />} />
-          <Route path="/agencies" element={<Agencies />} />
-          <Route path="/tours" element={<Tours />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ScrollToTop />
+        <MainRoutes />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
