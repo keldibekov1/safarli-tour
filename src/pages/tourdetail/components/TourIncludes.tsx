@@ -9,7 +9,7 @@ const TourIncludes = ({
 }) => (
   <div className="grid md:grid-cols-2 gap-6">
     <Box title="Narxga kiradi" items={included} ok />
-    <Box title="Narxga kirmaydi" items={notIncluded} />
+    
   </div>
 );
 

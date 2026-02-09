@@ -122,7 +122,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-primary-foreground/70 text-sm">
                 <Phone className="w-4 h-4" />
-                <span>+998 90 039 30 99</span>
+                <span>+998 93 589 55 59</span>
               </li>
               <li className="flex items-center gap-2 text-primary-foreground/70 text-sm">
                 <Mail className="w-4 h-4" />
@@ -138,7 +138,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/50 text-sm">
-            © 2025 Safarli. Barcha huquqlar himoyalangan.
+            © 2026 Safarli. Barcha huquqlar himoyalangan.
           </p>
           <div className="flex gap-4">
             <Link

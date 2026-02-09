@@ -1,8 +1,10 @@
 import Agencies from "@/pages/agencies/Agencies";
 import Login from "@/pages/auth/login/Login";
 import Register from "@/pages/auth/register/Register";
+import HotToursPage from "@/pages/HotToursPage";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
+import TourDetail from "@/pages/TourDetail";
 import TourDetails from "@/pages/tourdetail/TourDetails";
 import Tours from "@/pages/tours/Tours";
 import { Route, Routes } from "react-router-dom";
@@ -14,6 +16,9 @@ const MainRoutes = () => {
       <Route path="/tour/:id" element={<TourDetails />} />
       <Route path="/agencies" element={<Agencies />} />
       <Route path="/tours" element={<Tours />} />
+       <Route path="/hots/:id" element={<TourDetail />} />
+       <Route path="/hot" element={<HotToursPage />} />
+
 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

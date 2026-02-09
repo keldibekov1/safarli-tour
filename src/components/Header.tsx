@@ -30,17 +30,12 @@ const Header = () => {
             Turlar
           </Link>
           <Link
-            to="/agencies"
+            to="/hot"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
-            Firmalar
+           Qaynoq turlar
           </Link>
-          <Link
-            to="/about"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Biz haqimizda
-          </Link>
+    
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
