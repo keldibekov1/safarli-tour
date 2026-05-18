@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./hooks/ScrollToTop";
 import MainRoutes from "./routes";
-import Snowfall from "react-snowfall";
 
 const queryClient = new QueryClient();
 
@@ -14,16 +13,6 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Snowfall
-        snowflakeCount={120}
-        style={{
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          zIndex: 9999,
-          pointerEvents: "none",
-        }}
-      />
       <BrowserRouter>
         <ScrollToTop />
         <MainRoutes />

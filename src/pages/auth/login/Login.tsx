@@ -1,7 +1,79 @@
+import axios from "axios";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, Lock } from "lucide-react";
+import { Lock, Phone } from "lucide-react";
+
+const authApi = axios.create({
+  baseURL: import.meta.env.VITE_AUTH_API_URL ?? "http://localhost:3000",
+});
+
+type LoginForm = {
+  phone: string;
+  password: string;
+};
+
+type LoginResponse = {
+  token: string;
+};
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState<LoginForm>({
+    phone: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const normalizedPhone = form.phone.replace(/[\s()-]/g, "");
+
+  const getErrorMessage = (error: unknown) => {
+    if (axios.isAxiosError(error)) {
+      const data = error.response?.data as { message?: string } | undefined;
+      return data?.message ?? "Telefon raqam yoki parol noto'g'ri";
+    }
+
+    return "Kutilmagan xatolik yuz berdi";
+  };
+
+  const handleChange =
+    (field: keyof LoginForm) =>
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setForm((prev) => ({ ...prev, [field]: event.target.value }));
+      setError("");
+    };
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+
+    if (!/^\+998\d{9}$/.test(normalizedPhone)) {
+      setError("Telefon raqamni +998901234567 ko'rinishida kiriting");
+      return;
+    }
+
+    if (!form.password) {
+      setError("Parolni kiriting");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { data } = await authApi.post<LoginResponse>("/users/login", {
+        phone: normalizedPhone,
+        password: form.password,
+      });
+
+      localStorage.setItem("accessToken", data.token);
+      navigate("/base");
+    } catch (error) {
+      setError(getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
       className="
@@ -46,15 +118,23 @@ const Login = () => {
             Safarliga kirish
           </h1>
 
-          <form className="space-y-5">
+          {error && (
+            <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+              {error}
+            </div>
+          )}
+
+          <form className="space-y-5" onSubmit={handleLogin}>
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">
                 Telefon raqam
               </label>
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <Phone className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 <input
                   type="tel"
+                  value={form.phone}
+                  onChange={handleChange("phone")}
                   placeholder="+998 90 999 99 99"
                   className="
                     w-full
@@ -78,6 +158,8 @@ const Login = () => {
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                 <input
                   type="password"
+                  value={form.password}
+                  onChange={handleChange("password")}
                   placeholder="••••••••"
                   className="
                     w-full
@@ -112,6 +194,7 @@ const Login = () => {
 
             <button
               type="submit"
+              disabled={isLoading}
               className="
                 w-full
                 rounded-xl
@@ -124,9 +207,10 @@ const Login = () => {
                 transition-transform
                 hover:scale-[1.01]
                 active:scale-[0.99]
+                disabled:cursor-not-allowed disabled:opacity-70
               "
             >
-              Kirish
+              {isLoading ? "Kirilmoqda..." : "Kirish"}
             </button>
           </form>
 

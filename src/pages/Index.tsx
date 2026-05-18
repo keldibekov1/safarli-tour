@@ -1,5 +1,3 @@
-// ✅ Index.tsx (Bot icon bosilganda modal ochiladi)
-// Eslatma: Dialog shadcn/ui bo‘lsa ishlaydi: "@/components/ui/dialog"
 
 import { useState } from "react";
 import Header from "@/components/Header";
@@ -49,7 +47,6 @@ const Index = () => {
             ></Button>
           </div>
 
-          {/* Body */}
           <div className="p-4">
             <Aiagent />
           </div>

@@ -13,6 +13,7 @@ const MainRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
+      <Route path="/base" element={<Index />} />
       <Route path="/tour/:id" element={<TourDetails />} />
       <Route path="/agencies" element={<Agencies />} />
       <Route path="/tours" element={<Tours />} />

@@ -1,13 +1,55 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+type TokenPayload = {
+  name?: string;
+  phone?: string;
+};
+
+const getUserFromToken = (): TokenPayload | null => {
+  const token = localStorage.getItem("accessToken");
+
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const [, payload] = token.split(".");
+    const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+    return JSON.parse(atob(base64)) as TokenPayload;
+  } catch {
+    localStorage.removeItem("accessToken");
+    return null;
+  }
+};
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState<TokenPayload | null>(() => getUserFromToken());
   const { theme, toggleTheme } = useTheme();
+  const userName = user?.name || user?.phone || "Profil";
+  const userInitial = userName.charAt(0).toUpperCase();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setUser(null);
+    setIsMenuOpen(false);
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-card/80 backdrop-blur-lg border-b border-border">
@@ -50,17 +92,54 @@ const Header = () => {
             )}
           </button>
 
-          <Link to="/login">
-            <Button variant="default" size="sm">
-              Kirish
-            </Button>
-          </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 outline-none transition-colors hover:bg-muted">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-accent text-sm font-bold text-accent-foreground">
+                      {userInitial}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="max-w-32 truncate text-sm font-semibold text-foreground">
+                    {userName}
+                  </span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>
+                  <span className="block truncate">{userName}</span>
+                  {user.phone && (
+                    <span className="block truncate text-xs font-normal text-muted-foreground">
+                      {user.phone}
+                    </span>
+                  )}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="cursor-pointer text-red-600 focus:text-red-600"
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button variant="default" size="sm">
+                  Kirish
+                </Button>
+              </Link>
 
-          <Link to="/register">
-            <Button variant="accent" size="sm">
-              Ro'yxatdan o'tish
-            </Button>
-          </Link>
+              <Link to="/register">
+                <Button variant="accent" size="sm">
+                  Ro'yxatdan o'tish
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -108,16 +187,48 @@ const Header = () => {
               Biz haqimizda
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
-              <Link to="/login">
-                <Button size="sm" className="justify-start">
-                  Kirish
-                </Button>
-              </Link>
-              <Link to="/register">
-                <Button variant="accent" size="sm">
-                  Ro'yxatdan o'tish
-                </Button>
-              </Link>
+              {user ? (
+                <div className="flex items-center gap-3 rounded-lg border border-border bg-background p-3">
+                  <Avatar className="h-9 w-9">
+                    <AvatarFallback className="bg-accent text-sm font-bold text-accent-foreground">
+                      {userInitial}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-foreground">
+                      {userName}
+                    </p>
+                    {user.phone && (
+                      <p className="truncate text-xs text-muted-foreground">
+                        {user.phone}
+                      </p>
+                    )}
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleLogout}
+                    className="ml-auto gap-2"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Log out
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <Button size="sm" className="justify-start">
+                      Kirish
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button variant="accent" size="sm">
+                      Ro'yxatdan o'tish
+                    </Button>
+                  </Link>
+                </>
+              )}
               <button
                 onClick={toggleTheme}
                 className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
