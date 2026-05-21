@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Lock, Phone } from "lucide-react";
 
 const authApi = axios.create({
-  baseURL: import.meta.env.VITE_AUTH_API_URL ?? "http://localhost:3000",
+  baseURL: import.meta.env.VITE_AUTH_API_URL ?? "https://api.avtotestzone.uz",
 });
 
 type LoginForm = {
